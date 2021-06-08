@@ -1,0 +1,51 @@
+﻿@model Book;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html bgcolor="#c0c0c0">
+</html>
+<link rel="stylesheet" href="~/css/site.css">
+<div class="edit-block" style="height: 400px; width: 450px; border: 5px solid #59006f; background-image: linear-gradient(180deg, #4d84e5, #ddd 40%, #fc8cdf)">
+    <div>
+        <a asp-action="Index">Home</a>
+    </div>
+    <h2>Book</h2>
+    @using (Html.BeginForm("Create", "Home"))
+    {
+        @Html.HiddenFor(m => m.Id)
+        <div class="dataBox">
+            <label>Name</label><br />
+            @Html.TextBoxFor(m => m.Name, new { @class = "text-box" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="dataBox">
+            <label>Label</label><br />
+            @Html.TextBoxFor(m => m.Label, new { @class = "text-box" })
+            @Html.ValidationMessageFor(m => m.Label)
+        </div>
+        <div class="dataBox">
+            <label>Language</label><br />
+            @Html.DropDownList("Language",
+            new SelectList(Stat.Languages), "")
+        </div>
+        <div class="dataBox">
+            <label>Year</label><br />
+            @Html.TextBoxFor(m => m.Year, "1918", new
+            {
+                type = "number",
+                @class =
+           "text-box"
+            })
+        </div>
+        <div class="dataBox">
+            <label>Authors</label><br />
+            @Html.DropDownListFor(m => m.AuthorId, ViewBag.Authors as SelectList)
+        </div>
+        <br />
+        <div class="dataBox">
+            <input type="submit" value="Save" />
+        </div>
+    }
+</div>
+

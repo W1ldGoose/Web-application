@@ -1,0 +1,36 @@
+﻿@model Author;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+</html>
+<div class="metrica-block" style="height: 500px; width: 450px; border: 5px solid #59006f; background-image: linear-gradient(180deg, #4d84e5, #ddd 40%, #fc8cdf)">
+    <div>
+        <a asp-action="Index">Home</a>
+    </div>
+    <h2>Metrica</h2>
+    <div style="font-weight:700">Общее количество объектов</div>
+    <div>Количество авторов: @ViewData["CountAuths"]</div>
+    <div>Количество книг: @ViewData["CountBooks"]</div>
+    <div>Общее количество объектов: @ViewData["Count"]</div>
+    <br />
+    <div style="font-weight:700">Количество книг по языкам</div>
+    @foreach (var item in ViewData["GrLanguage"] as List<IGrouping<string, Book>>)
+    {
+        <div>@item.Key: @item.Count()</div>
+    }
+    <br />
+    <div style="font-weight:700">Средний возраст книг по языкам</div>
+    @foreach (var item in ViewData["GrLanguage"] as List<IGrouping<string, Book>>)
+    {
+        <div>@item.Key: @item.Average(x => 2021 - x.Year)</div>
+    }
+    <br />
+    <div style="font-weight:700">Количество книг для каждого автора</div>
+    @foreach (var item in ViewData["GrAuths"] as List<IGrouping<int, Book>>)
+    {
+        <div>@(item.First().Author.Name): @item.Count()</div>
+    }
+
+</div>

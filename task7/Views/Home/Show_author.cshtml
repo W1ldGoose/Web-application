@@ -1,0 +1,31 @@
+﻿@model Author;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+</html>
+<div class="instr-block" style="height: 400px; width: 450px; border: 5px solid #59006f; background-image: linear-gradient(180deg, #4d84e5, #ddd 40%, #fc8cdf)">
+    <div>
+        <a asp-action="Index">Home</a>
+    </div>
+    <h2>Author</h2>
+    @Html.HiddenFor(m => m.Id)
+    <div style="font-weight:600">Name: </div>
+    <div>@Model.Name</div>
+    <br />
+    <div style="font-weight:600">Type: </div>
+    <div>@Model.Year</div>
+    <br />
+    <div>
+        <div style="font-weight:600">Books:</div>
+        @foreach (var item in ViewData["Books"] as IQueryable<Book>)
+        {
+            @(item.Name+" "+@item.Label) <br />
+        }
+
+    </div>
+    <br />
+    @Html.ActionLink("Edit", "Edit_auth", Model)
+
+</div>
